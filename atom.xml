@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.ifanxing.xyz</id>
     <title>繁星Blog</title>
-    <updated>2022-04-29T17:02:05.957Z</updated>
+    <updated>2022-04-29T17:05:01.425Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.ifanxing.xyz"/>
     <link rel="self" href="https://blog.ifanxing.xyz/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="https://blog.ifanxing.xyz/post/2022-nian-4-yue-30-ri-fan-xing-blog-zheng-shi-shang-xian/">
         </link>
         <updated>2022-04-29T16:57:40.000Z</updated>
-        <content type="html"><![CDATA[<p>经过两天的间断学习研究，采用github pager、gridea生成静态网页并发布，绑定了之前折腾的一个域名，在2022年4月30日1点整正式发布上线。</p>
+        <content type="html"><![CDATA[<p>经过两天的间断学习研究，采用github pager、gridea生成静态网页并发布，绑定了之前折腾的一个域名，在2022年4月30日1点整正式发布上线。👏👏👏</p>
 ]]></content>
     </entry>
     <entry>
