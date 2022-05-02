@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.ifanxing.xyz</id>
     <title>繁星Blog</title>
-    <updated>2022-05-02T17:16:48.607Z</updated>
+    <updated>2022-05-02T17:30:22.999Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.ifanxing.xyz"/>
     <link rel="self" href="https://blog.ifanxing.xyz/atom.xml"/>
@@ -10,6 +10,20 @@
     <logo>https://blog.ifanxing.xyz/images/avatar.png</logo>
     <icon>https://blog.ifanxing.xyz/favicon.ico</icon>
     <rights>All rights reserved 2022, 繁星Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[黑群晖 DSM6.2.2 套件源使用不了，解决方法。]]></title>
+        <id>https://blog.ifanxing.xyz/post/cX1lHjm9G/</id>
+        <link href="https://blog.ifanxing.xyz/post/cX1lHjm9G/">
+        </link>
+        <updated>2022-05-02T17:21:45.000Z</updated>
+        <content type="html"><![CDATA[<p>我去GitHub上翻issues得知是在DSM6非最新版本的系统证书过期引起的相关问题，个人通过以下命令解决了问题<br>
+未完全更新的 DSM 6 上的信任证书太旧（证书必须最近过期）。如果您想继续使用旧版本（显然不推荐），您可以使用 SSH 通过用更新的文件覆盖文件（假设您信任 curl 开发人员）手动更新信任存储：</p>
+<pre><code>sudo mv /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt.bak &amp;&amp; sudo curl -Lko /etc/ssl/certs/ca-certificates.crt https://curl.se/ca/cacert.pem
+</code></pre>
+<p>这将解决问题，或者，您可以将时钟调回。然而，最好的解决方案是更新到更新的 DSM6 版本。</p>
+<p>From can't add community repo - &quot;invalid location&quot; error · Issue #4897 · SynoCommunity/spksrc (github.com)</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[22.05.02 云云]]></title>
         <id>https://blog.ifanxing.xyz/post/PLbYu3hNO/</id>

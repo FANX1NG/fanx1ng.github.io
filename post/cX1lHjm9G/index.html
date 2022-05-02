@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>搜索 - 繁星Blog</title>
+<title>黑群晖 DSM6.2.2 套件源使用不了，解决方法。 | 繁星Blog</title>
 
 <link rel="shortcut icon" href="https://blog.ifanxing.xyz/favicon.ico?v=1651512617940">
 
@@ -27,21 +25,11 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.0/dist/fuse.basic.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.3/ejs.min.js"></script>
-    <script src="https://blog.ifanxing.xyz/media/gridea-search/gridea-search.js"></script>
-    <script src="https://blog.ifanxing.xyz/media/gridea-search/result-template.ejs" type="text/ejs"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
-
 <body>
-    <style>
-        .searched-keyword {
-            background-color: yellow;
-            color: red;
-        }
-    </style>
-    <div class="main gt-bg-theme-color-first">
-        <nav class="navbar navbar-expand-lg">
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -97,16 +85,49 @@
     </div>
 </nav>
 
-        <div id="gridea-search-result" data-update="1651512617940">
-            <div class="searching" style="font-size: 18px; margin-top: 50px;">
-                <i class="fa fa-sync-alt fa-spin"></i>&nbsp;&nbsp;搜索中......
-                <br><br>
-                <span style="font-size: 65%; color: #aaa">第一次搜索可能需要耗费较长时间构建索引，请耐心等待...</span>
-            </div>
-            <div class="no-result" style="display:none; font-size: 20px; margin-top: 50px;">
-                <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;未搜索到相关文章，请更换关键词
-            </div>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    黑群晖 DSM6.2.2 套件源使用不了，解决方法。
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-05-03 ·
+                    </time>
+                    
+                        <a href="https://blog.ifanxing.xyz/tag/mf63D1OQt/" class="post-tags">
+                            # nas
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>我去GitHub上翻issues得知是在DSM6非最新版本的系统证书过期引起的相关问题，个人通过以下命令解决了问题<br>
+未完全更新的 DSM 6 上的信任证书太旧（证书必须最近过期）。如果您想继续使用旧版本（显然不推荐），您可以使用 SSH 通过用更新的文件覆盖文件（假设您信任 curl 开发人员）手动更新信任存储：</p>
+<pre><code>sudo mv /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt.bak &amp;&amp; sudo curl -Lko /etc/ssl/certs/ca-certificates.crt https://curl.se/ca/cacert.pem
+</code></pre>
+<p>这将解决问题，或者，您可以将时钟调回。然而，最好的解决方案是更新到更新的 DSM6 版本。</p>
+<p>From can't add community repo - &quot;invalid location&quot; error · Issue #4897 · SynoCommunity/spksrc (github.com)</p>
+
+                </div>
+            </article>
         </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://blog.ifanxing.xyz/post/PLbYu3hNO/" class="post-title gt-a-link">
+                    22.05.02 云云
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>
     <div class="social-container">
@@ -138,6 +159,6 @@
 </script>
 
     </div>
+</div>
 </body>
-
 </html>
