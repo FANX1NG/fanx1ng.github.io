@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.ifanxing.xyz</id>
     <title>繁星Blog</title>
-    <updated>2022-05-03T19:18:32.356Z</updated>
+    <updated>2022-05-03T19:58:07.791Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.ifanxing.xyz"/>
     <link rel="self" href="https://blog.ifanxing.xyz/atom.xml"/>
@@ -10,6 +10,18 @@
     <logo>https://blog.ifanxing.xyz/images/avatar.png</logo>
     <icon>https://blog.ifanxing.xyz/favicon.ico</icon>
     <rights>All rights reserved 2022, 繁星Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[22.05.03 云云]]></title>
+        <id>https://blog.ifanxing.xyz/post/cSkPZCyFU/</id>
+        <link href="https://blog.ifanxing.xyz/post/cSkPZCyFU/">
+        </link>
+        <updated>2022-05-03T19:42:11.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="有点睡不醒的我">有点睡不醒的我</h3>
+<p>早上被姐姐叫醒，帮忙做了些事，感觉很困就又回床上睡了，在睡眠中迷迷糊糊听到姐姐出去了，我有印象是要跟朋友出去玩，就继续睡了。</p>
+<p>之后爷爷打电话过来，让我过去帮忙，我答应了，不过还是因为太困了，在床上拖了半个钟才过去，回来之后，躺沙发上，昏昏沉沉的又睡着了😴😴😴</p>
+<p>到晚上吃饭的时间，在沙发上又拖了半个钟才吃饭，回来接着睡，睡了接近一个小时，估计是睡饱了，现在很有精神了😂</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[黑群晖 DSM6.2.2 套件源使用不了，解决方法。]]></title>
         <id>https://blog.ifanxing.xyz/post/cX1lHjm9G/</id>
