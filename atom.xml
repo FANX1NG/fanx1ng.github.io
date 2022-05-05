@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://blog.ifanxing.xyz</id>
     <title>繁星Blog</title>
-    <updated>2022-05-04T19:03:56.719Z</updated>
+    <updated>2022-05-05T16:46:52.383Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://blog.ifanxing.xyz"/>
     <link rel="self" href="https://blog.ifanxing.xyz/atom.xml"/>
@@ -10,6 +10,31 @@
     <logo>https://blog.ifanxing.xyz/images/avatar.png</logo>
     <icon>https://blog.ifanxing.xyz/favicon.ico</icon>
     <rights>All rights reserved 2022, 繁星Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[22.05.05 云云]]></title>
+        <id>https://blog.ifanxing.xyz/post/t8CJel_0m/</id>
+        <link href="https://blog.ifanxing.xyz/post/t8CJel_0m/">
+        </link>
+        <updated>2022-05-05T14:46:10.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="午饭">午饭</h4>
+<p>吃的是姐姐买回来的寿司，但是上面的肉很薄，吃起来没什么肉的味道，除了虾的寿司有虾的味道，其他的都是米饭和酱油的味道，不知道这一份要卖多少钱。</p>
+<h4 id="拆迁">拆迁</h4>
+<p>爷爷现在住的地方要拆迁，但是政府安排的方案实在不好，大家也没接受。今天有挖掘机开始把那片区域周围夷平了，爷爷隔壁家的婆婆骂骂咧咧的，因为被夷平的土地上面原本种着她们种的菜，当然那上面也有爷爷种的菜，但爷爷没什么表现，不知道爷爷心里是怎么想。我在想政府把周围夷平之后，下一步会怎么样，我猜想他们可能会断电断水什么的，因为听姑妈说，负责这些的人，以前把属于政府的好多地都卖了，是坏人，所以感觉这是他们坏人会做出来的事。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个比较有趣的禁用win更新的办法]]></title>
+        <id>https://blog.ifanxing.xyz/post/snnSz3r6F/</id>
+        <link href="https://blog.ifanxing.xyz/post/snnSz3r6F/">
+        </link>
+        <updated>2022-05-05T14:29:29.000Z</updated>
+        <content type="html"><![CDATA[<p>今天逛小黑盒，看到有人再调侃win10更新的一些东西，进去看评论，看到一个比较有趣的禁用更新办法。</p>
+<p>时间调整到<strong>2050</strong>年。然后安全，<strong>7天后更新</strong>，然后把时间<strong>改回来</strong>，结束。</p>
+<figure data-type="image" tabindex="1"><img src="https://blog.ifanxing.xyz/post-images/1651761299583.jpg" alt="禁用更新" loading="lazy"></figure>
+<p>win11也差不多，不过7天后更新，被微软改成了<strong>暂停更新</strong>，也是可以通过更改时间，再暂停更新，来达到目的。<br>
+网友真的太有意思了，哈哈哈😄。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[22.05.04 云云]]></title>
         <id>https://blog.ifanxing.xyz/post/KfvGJckJ_/</id>
