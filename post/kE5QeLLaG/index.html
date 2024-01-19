@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>关于隐藏电视播放器中群晖 nas SMB 共享没有权限的文件夹 | 繁星Blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.ifanxing.eu.org/favicon.ico?v=1705634048861">
+<link rel="stylesheet" href="https://blog.ifanxing.eu.org/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="新年假期的那一段时间，喜欢倒腾群晖nas下载一些电影、电视剧，通过smb共享在电视上看，但是电视软件中登录的nas用户对于没有权限的文件夹也是可以看到，不过访问需要又权限的用户重新登录，而nas中又一些学习资料是不希望家人看到的，通过常规操..." />
+    <meta name="keywords" content="nas" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.ifanxing.eu.org">
+        <img src="https://blog.ifanxing.eu.org/images/avatar.png?v=1705634048861" class="site-logo">
+        <h1 class="site-title">繁星Blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://blog.ifanxing.eu.org/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">关于隐藏电视播放器中群晖 nas SMB 共享没有权限的文件夹</h2>
+            <div class="post-date">2022-05-02</div>
+            
+            <div class="post-content" v-pre>
+              <p>新年假期的那一段时间，喜欢倒腾群晖nas下载一些电影、电视剧，通过smb共享在电视上看，但是电视软件中登录的nas用户对于没有权限的文件夹也是可以看到，不过访问需要又权限的用户重新登录，而nas中又一些学习资料是不希望家人看到的，通过常规操作没有办法隐藏，在网上找了几个方法，也是把这个问题解决了。</p>
+<h3 id="群晖-nas-对无权限用户隐藏共享文件夹">群晖 NAS 对无权限用户隐藏共享文件夹<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h3>
+<h3 id="隐藏无权限文件夹">隐藏无权限文件夹</h3>
+<p>如果希望对用户隐藏没有访问权限的文件夹，可以进入 <strong>控制面板</strong> &gt; <strong>共享文件夹</strong>，选择需要设置的共享文件夹，单击 <strong>编辑</strong>，在 <strong>常规</strong> 选项卡，勾选 <strong>对没有权限的用户隐藏子文件夹和文件</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://blog.ifanxing.eu.org/post-images/1651510153158.png" alt="隐藏子文件夹" loading="lazy"></figure>
+<p>此设置仅对子文件夹有效，对于根目录的共享文件夹，有没有办法隐藏呢？当然可以勾选 <strong>在&quot;网上邻居&quot;隐藏此共享文件夹</strong> ，但是这样对有权限的用户同样隐藏了，需要手动输入文件夹路径才可以访问，很不方便，显然不是我们需要的。</p>
+<h3 id="隐藏根目录共享文件夹">隐藏根目录共享文件夹</h3>
+<p>如果需要对没有权限的用户隐藏根目录的共享文件夹，对有权限的用户正常显示，可以按以下方法:</p>
+<ol>
+<li>
+<h4 id="ssh-登录">SSH 登录</h4>
+<p>用 <code>ssh</code> 的方式登录到群晖系统</p>
+</li>
+<li>
+<h4 id="编辑-samba-配置文件">编辑 samba 配置文件</h4>
+<p>编辑 samba 配置文件，文件路径：<code>/etc/samba/smb.conf</code>，DSM 6 之前的版本在 <code>/usr/syno/etc/samba.conf</code></p>
+<p>可用 vi 编辑</p>
+<pre><code>sudo vi /etc/samba/smb.conf
+</code></pre>
+<p>在 <code>[global]</code> 里加入：</p>
+<pre><code>map to guest=never
+access based share enum=yes
+</code></pre>
+<p>保存文件，退出。</p>
+<p>最后重启 NAS 生效。</p>
+</li>
+</ol>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>https://bwbin.com/posts/synology-nas-hide-folders-from-users-without-permissions/ <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://blog.ifanxing.eu.org/tag/mf63D1OQt/" class="tag">
+                    nas
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.ifanxing.eu.org/post/azc4_-uHn/">
+                  <h3 class="post-title">
+                    22.05.01 云云
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://blog.ifanxing.eu.org</id>
+    <title>繁星Blog</title>
+    <updated>2024-01-19T03:14:44.687Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://blog.ifanxing.eu.org"/>
+    <link rel="self" href="https://blog.ifanxing.eu.org/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://blog.ifanxing.eu.org/images/avatar.png</logo>
+    <icon>https://blog.ifanxing.eu.org/favicon.ico</icon>
+    <rights>All rights reserved 2024, 繁星Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[电脑在无操作挂机一段时间后会卡死关机重启的一个解决办法]]></title>
+        <id>https://blog.ifanxing.eu.org/post/FZ2quK1ys/</id>
+        <link href="https://blog.ifanxing.eu.org/post/FZ2quK1ys/">
+        </link>
+        <updated>2024-01-19T03:00:02.000Z</updated>
+        <content type="html"><![CDATA[<p>CPU C-States 在BIOS设置中把这个关掉就可以。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[小米 AX1800 安装 ShellClash]]></title>
+        <id>https://blog.ifanxing.eu.org/post/uzSKUyPy2/</id>
+        <link href="https://blog.ifanxing.eu.org/post/uzSKUyPy2/">
+        </link>
+        <updated>2023-12-18T15:30:48.000Z</updated>
+        <content type="html"><![CDATA[<p>本文介绍如何在小米 AX1800 上安装 ShellClash。</p>
+<h1 id="1-固件降级">1 固件降级</h1>
+<p><a href="https://github.com/ZintrulCre/warehouse/blob/main/resources/proxy/miwifi_rm1800_firmware_fafda_1.0.336.bin?raw=true">小米 AX1800 1.0.336 版本固件</a></p>
+<p>在 MiWiFi 后台的常用设置 -&gt; 系统状态中点击手动升级，使用 1.0.336 版本的固件对路由器进行降级，整个过程不需要任何额外的操作。</p>
+<figure data-type="image" tabindex="1"><img src="https://blog.ifanxing.eu.org/post-images/1702914867025.png" alt="" loading="lazy"></figure>
+<p>完成后第一次进入后台配置时选择不自动更新，或在小米 Wi-Fi 手机 App 中关闭自动更新功能。</p>
+<figure data-type="image" tabindex="2"><img src="https://blog.ifanxing.eu.org/post-images/1702914962586.png" alt="" loading="lazy"></figure>
+<p>更新完成后路由器会重置为路由器底部贴条的设置。</p>
+<h1 id="2-解锁-ssh">2 解锁 SSH</h1>
+<p>首先登陆小米路由器后台 192.168.31.1，将浏览器地址栏中 stok= 后面的一部分的即为拷贝下来。</p>
+<figure data-type="image" tabindex="3"><img src="https://blog.ifanxing.eu.org/post-images/1702915096024.png" alt="" loading="lazy"></figure>
+<h1 id="获取-ssh-权限">获取 SSH 权限</h1>
+<p>在浏览器中打开一个新页签，在地址栏中输入下面的链接，将其中 stok=...... 中后半部分的六个点换成刚才拷贝的内容，页面上显示 {&quot;code&quot;:0} 即代表成功，这样就解锁了 SSH 到路由器上的权限。</p>
+<p><code>http://192.168.31.1/cgi-bin/luci/;stok=....../api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B%20nvram%20set%20ssh_en%3D1%3B%20nvram%20commit%3B%20sed%20-i%20's%2Fchannel%3D.*%2Fchannel%3D%5C%22debug%5C%22%2Fg'%20%2Fetc%2Finit.d%2Fdropbear%3B%20%2Fetc%2Finit.d%2Fdropbear%20start%3B </code></p>
+<figure data-type="image" tabindex="4"><img src="https://blog.ifanxing.eu.org/post-images/1702915231228.png" alt="" loading="lazy"></figure>
+<h1 id="修改-root-密码">修改 root 密码</h1>
+<p>在浏览器中打开一个新页签，在地址栏中输入下面的链接，将其中 stok=...... 中后半部分的六个点换成刚才拷贝的内容，页面上显示 {&quot;code&quot;:0} 即代表成功，这样就将路由器上 root 账户的密码改为了 admin。</p>
+<p><code>http://192.168.31.1/cgi-bin/luci/;stok=....../api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B%20echo%20-e%20'admin%5Cnadmin'%20%7C%20passwd%20root%3B </code></p>
+<h1 id="连接-ssh">连接 SSH</h1>
+<p>打开 terminal 或者 powershell，ssh 到路由器的 root 账户上，密码是 admin。</p>
+<p><code>ssh root@192.168.31.1 </code><br>
+<img src="https://blog.ifanxing.eu.org/post-images/1702915447632.png" alt="" loading="lazy"></p>
+<h1 id="3-使用-shellclash">3 使用 ShellClash</h1>
+<p><strong>安装</strong></p>
+<p>ssh 到路由器上后，输入以下命令安装 ShellClash。</p>
+<p><code>sh -c &quot;$(curl -kfsSl https://cdn.jsdelivr.net/gh/juewuy/ShellClash@master/install.sh)&quot; &amp;&amp; source /etc/profile &amp;&gt; /dev/null </code><br>
+选择 1 安装到 /etc 目录下。</p>
+<figure data-type="image" tabindex="5"><img src="https://blog.ifanxing.eu.org/post-images/1702915596499.png" alt="" loading="lazy"></figure>
+<p><strong>配置</strong></p>
+<p>安装完成后，输入 clash 命令进行相关的配置，环境选择 1 主路由或旁路由，保证局域网流量都能通过 ShellClash 客户端。</p>
+<p>UDP 流量和 dashboard 面板根据需求选择，随后等待 clash 核心和 GeoIP 数据库下载完成。</p>
+<figure data-type="image" tabindex="6"><img src="https://blog.ifanxing.eu.org/post-images/1702915690821.png" alt="" loading="lazy"></figure>
+<p>接下来选 1 开始导入配置文件，19如果有 Clash 订阅链接的话可以选 2 生成 Clash 配置文件，再粘贴订阅的 url；否则选 1 直接导入。</p>
+<figure data-type="image" tabindex="7"><img src="https://blog.ifanxing.eu.org/post-images/1702915767354.png" alt="" loading="lazy"></figure>
+<p>最后选 1 启动 Clash 服务。</p>
+<p>启动完成后再次运行 clash，选 4 允许开机启动，这样以后每次路由器重启都不再需要手动 SSH 并重新启动 Clash 了。同时还可以在局域网内访问 http://192.168.31.1:9999/ui 来进行节点和规则的修改。</p>
+<figure data-type="image" tabindex="8"><img src="https://blog.ifanxing.eu.org/post-images/1702916242788.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[windows powershell中文乱码]]></title>
+        <id>https://blog.ifanxing.eu.org/post/HIYKmSrLS/</id>
+        <link href="https://blog.ifanxing.eu.org/post/HIYKmSrLS/">
+        </link>
+        <updated>2023-09-14T04:36:36.000Z</updated>
+        <content type="html"><![CDATA[<p>Windows PowerShell 中文乱码的问题通常是由于系统默认的代码页和字符集与 PowerShell 会话的代码页和字符集不匹配造成的。</p>
+<p>要解决这个问题，您可以尝试以下步骤：</p>
+<ul>
+<li>
+<p>在 PowerShell 中输入 <code>$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'</code>，然后按回车键。这会将输出文件的默认编码更改为 UTF-8，这通常可以解决乱码问题。</p>
+</li>
+<li>
+<p>如果仍然无法解决问题，可以尝试更改 PowerShell 会话的代码页和字符集。输入 <code>chcp 65001</code> 并按回车键，然后输入 <code>$OutputEncoding = [console]::OutputEncoding = [System.Text.Encoding]::UTF8</code> 并按回车键。这会将 PowerShell 会话的代码页和字符集更改为 UTF-8。</p>
+</li>
+<li>
+<p>如果仍然无法解决问题，可以尝试在 PowerShell 中运行以下命令来更改文本文件的默认编码：<code>[System.Text.Encoding]::Default = [System.Text.Encoding]::UTF8</code></p>
+</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[windows中cmd和powershell设置代理]]></title>
+        <id>https://blog.ifanxing.eu.org/post/CKfY8rEpb/</id>
+        <link href="https://blog.ifanxing.eu.org/post/CKfY8rEpb/">
+        </link>
+        <updated>2023-07-01T09:17:03.000Z</updated>
+        <content type="html"><![CDATA[<p>本文用socks5协议进行设置代理，用户可以根据自己的需求将socks5替换http和https 协议自行设置<br>
+本文测试需要打开代理软件，打开即可，无需在软件上开启代理。</p>
+<p>windows<br>
+cmd<br>
+设置临时代理（关闭cmd即设置的代理消失）<br>
+set all_proxy=socks5://127.0.0.1:10808 (端口号为你代理软件socks5协议的端口)<br>
+删除临时代理<br>
+set all_proxy=<br>
+查看当前环境变量<br>
+set<br>
+查看当前公网ip判断代理是否成功<br>
+curl cip.cc</p>
+<p>powershell<br>
+设置临时代理（关闭powershell即设置的代理消失）<br>
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>e</mi><mi>n</mi><mi>v</mi><mo>:</mo><mi>a</mi><mi>l</mi><msub><mi>l</mi><mi>p</mi></msub><mi>r</mi><mi>o</mi><mi>x</mi><mi>y</mi><mo>=</mo><mi mathvariant="normal">&quot;</mi><mi>s</mi><mi>o</mi><mi>c</mi><mi>k</mi><mi>s</mi><mn>5</mn><mo>:</mo><mi mathvariant="normal">/</mi><mi mathvariant="normal">/</mi><mn>127.0.0.1</mn><mo>:</mo><mn>10808</mn><mi mathvariant="normal">&quot;</mi><mo>(</mo><mi mathvariant="normal">端</mi><mi mathvariant="normal">口</mi><mi mathvariant="normal">号</mi><mi mathvariant="normal">为</mi><mi mathvariant="normal">你</mi><mi mathvariant="normal">代</mi><mi mathvariant="normal">理</mi><mi mathvariant="normal">软</mi><mi mathvariant="normal">件</mi><mi>s</mi><mi>o</mi><mi>c</mi><mi>k</mi><mi>s</mi><mn>5</mn><mi mathvariant="normal">协</mi><mi mathvariant="normal">议</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">端</mi><mi mathvariant="normal">口</mi><mo>)</mo><mi mathvariant="normal">删</mi><mi mathvariant="normal">除</mi><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">临</mi><mi mathvariant="normal">时</mi><mi mathvariant="normal">代</mi><mi mathvariant="normal">理</mi></mrow><annotation encoding="application/x-tex">env:all_proxy=&quot;socks5://127.0.0.1:10808&quot; (端口号为你代理软件socks5协议的端口)
+删除当前临时代理
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.01968em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">&quot;</span><span class="mord mathdefault">s</span><span class="mord mathdefault">o</span><span class="mord mathdefault">c</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">s</span><span class="mord">5</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">/</span><span class="mord">/</span><span class="mord">1</span><span class="mord">2</span><span class="mord">7</span><span class="mord">.</span><span class="mord">0</span><span class="mord">.</span><span class="mord">0</span><span class="mord">.</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">8</span><span class="mord">0</span><span class="mord">8</span><span class="mord">&quot;</span><span class="mopen">(</span><span class="mord cjk_fallback">端</span><span class="mord cjk_fallback">口</span><span class="mord cjk_fallback">号</span><span class="mord cjk_fallback">为</span><span class="mord cjk_fallback">你</span><span class="mord cjk_fallback">代</span><span class="mord cjk_fallback">理</span><span class="mord cjk_fallback">软</span><span class="mord cjk_fallback">件</span><span class="mord mathdefault">s</span><span class="mord mathdefault">o</span><span class="mord mathdefault">c</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord mathdefault">s</span><span class="mord">5</span><span class="mord cjk_fallback">协</span><span class="mord cjk_fallback">议</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">端</span><span class="mord cjk_fallback">口</span><span class="mclose">)</span><span class="mord cjk_fallback">删</span><span class="mord cjk_fallback">除</span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">临</span><span class="mord cjk_fallback">时</span><span class="mord cjk_fallback">代</span><span class="mord cjk_fallback">理</span></span></span></span>env:all_proxy=&quot;&quot;<br>
+查看当前环境变量<br>
+ls env:*<br>
+暂不知晓curl 和 ping层面上检测代理是否成功,设置完临时代理，通过命令行界面已成功获得下载相关速度</p>
+<p>cmd和powershell设置永久代理<br>
+单击我的电脑属性=》选择高级系统设置=》选择环境变量=》选择系统变量=》选择新建<br>
+新建all_proxy，值设置为socks5://127.0.0.1:10808<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1688203174940.png" alt="" loading="lazy"></p>
+<p>保存即可保存为永久代理</p>
+<p>快捷代码设置临时命令行代理<br>
+cmd<br>
+可以 设置临时代理保存为cmd_setproxy.bat如下：<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1688203261789.png" alt="" loading="lazy"><br>
+删除临时代理如下<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1688203299231.png" alt="" loading="lazy"><br>
+将两个bat保存为同一路径下，将路径粘贴入系统变量的PATH中，即可设置成功<br>
+输入cmd_setproxy即可设置成功<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1688203348570.png" alt="" loading="lazy"><br>
+powershell<br>
+用管理员模式打开powershell<br>
+code <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>f</mi><mi>i</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">（</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi mathvariant="normal">表</mi><mi mathvariant="normal">示</mi><mi mathvariant="normal">用</mi><mi>v</mi><mi>s</mi><mi>c</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi mathvariant="normal">打</mi><mi mathvariant="normal">开</mi></mrow><annotation encoding="application/x-tex">profile（code表示用vscode打开</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">（</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">表</span><span class="mord cjk_fallback">示</span><span class="mord cjk_fallback">用</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">s</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">d</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">打</span><span class="mord cjk_fallback">开</span></span></span></span>profile文件,$profile表示powershell的配置文件）</p>
+<p><code>function setproxy{$env:all_proxy=&quot;socks5://127.0.0.1:10808&quot; }function unsetproxy{$env:unsetproxy=&quot;&quot; }</code><br>
+保存完后 另外再开powershell如果出现<br>
+系统无法使用脚本的报错<br>
+用管理员打开的powershell运行<br>
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned<br>
+选择同意更改策略，如果需要具体更改相关策略选项可以到官网文档进行查看</p>
+<p><code>https://docs.microsoft.com/zh-cn/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.2</code><br>
+保存完成 即可使用power shell使用setproxy快捷设置临时代理<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1688203503661.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Oculus客户端无法登录的解决办法]]></title>
+        <id>https://blog.ifanxing.eu.org/post/gUVOraek7/</id>
+        <link href="https://blog.ifanxing.eu.org/post/gUVOraek7/">
+        </link>
+        <updated>2023-03-04T05:57:36.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="问题描述"><strong>问题描述</strong></h1>
+<p>win10 环境，Oculus 应用版本30.0.0.36.502</p>
+<p>已挂梯子，注册 facebook 账号，安装好 Oculus，但是登录的时候一直卡在这个界面<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1677909505707.png" alt="一直转圈圈" loading="lazy"></p>
+<h1 id="解决方法修改-host">解决方法：修改 host</h1>
+<p>1.打开 C:\Windows\System32\drivers\etc</p>
+<p>2.找到 hosts 这个文件，用记事本打开</p>
+<p>3.在该文件的末尾添加以下字符：</p>
+<p>`157.240.11.49 graph.oculus.com</p>
+<p>157.240.11.49 www2.oculus.com</p>
+<p>157.240.8.49 scontent.oculuscdn.com</p>
+<p>157.240.8.49 securecdn.oculus.com`</p>
+<p>4.保存，保存时会让你选择路径，选择桌面</p>
+<p>5.将桌面保存的文件后缀 .txt 删掉，之后复制该文件，替换掉第 2 步打开的那个文件（C:\Windows\System32\drivers\etc 下的 host）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[如何通过局域网共享V2ray]]></title>
+        <id>https://blog.ifanxing.eu.org/post/A4Hcv7V_u/</id>
+        <link href="https://blog.ifanxing.eu.org/post/A4Hcv7V_u/">
+        </link>
+        <updated>2023-01-30T09:15:21.000Z</updated>
+        <content type="html"><![CDATA[<p>第一步<br>
+开启V2ray客户端，在参数设置中打开允许来自局域网的连接，并且记住本地监听端口，一般为10808<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1675070333378.png" alt="" loading="lazy"><br>
+<img src="https://blog.ifanxing.eu.org/post-images/1675070286239.png" alt="" loading="lazy"></p>
+<p>第二步<br>
+打开cmd，输入ipconfig，查看IP，记住自己的IP<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1675070442383.png" alt="" loading="lazy"></p>
+<p>第三步<br>
+手机连WiFi与电脑处于同一局域网下（即同一WiFi下），该代理为手动，在主机名那里输入上面我们查看的IP，端口号需要注意一下是本地监听端口10808+1，也就是10809。<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1675070647505.jpg" alt="" loading="lazy"></p>
+<p>第四步<br>
+打开V2rayN的全局代理</p>
+<p>第五步<br>
+打开Google测试是否能科学上网了</p>
+<p>这样就OK了</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[22.05.06 云云]]></title>
+        <id>https://blog.ifanxing.eu.org/post/QVKlkxSEi/</id>
+        <link href="https://blog.ifanxing.eu.org/post/QVKlkxSEi/">
+        </link>
+        <updated>2022-05-06T17:58:27.000Z</updated>
+        <content type="html"><![CDATA[<p>晚上打了一把游戏，顺风局，给对面翻盘了，挺难受的。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[22.05.05 云云]]></title>
+        <id>https://blog.ifanxing.eu.org/post/t8CJel_0m/</id>
+        <link href="https://blog.ifanxing.eu.org/post/t8CJel_0m/">
+        </link>
+        <updated>2022-05-05T14:46:10.000Z</updated>
+        <content type="html"><![CDATA[<h4 id="午饭">午饭</h4>
+<p>吃的是姐姐买回来的寿司，但是上面的肉很薄，吃起来没什么肉的味道，除了虾的寿司有虾的味道，其他的都是米饭和酱油的味道，不知道这一份要卖多少钱。</p>
+<h4 id="拆迁">拆迁</h4>
+<p>爷爷现在住的地方要拆迁，但是政府安排的方案实在不好，大家也没接受。今天有挖掘机开始把那片区域周围夷平了，爷爷隔壁家的婆婆骂骂咧咧的，因为被夷平的土地上面原本种着她们种的菜，当然那上面也有爷爷种的菜，但爷爷没什么表现，不知道爷爷心里是怎么想。我在想政府把周围夷平之后，下一步会怎么样，我猜想他们可能会断电断水什么的，因为听姑妈说，负责这些的人，以前把属于政府的好多地都卖了，是坏人，所以感觉这是他们坏人会做出来的事。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[一个比较有趣的禁用win更新的办法]]></title>
+        <id>https://blog.ifanxing.eu.org/post/snnSz3r6F/</id>
+        <link href="https://blog.ifanxing.eu.org/post/snnSz3r6F/">
+        </link>
+        <updated>2022-05-05T14:29:29.000Z</updated>
+        <content type="html"><![CDATA[<p>今天逛小黑盒，看到有人再调侃win10更新的一些东西，进去看评论，看到一个比较有趣的禁用更新办法。</p>
+<p>时间调整到<strong>2050</strong>年。然后安全，<strong>7天后更新</strong>，然后把时间<strong>改回来</strong>，结束。</p>
+<figure data-type="image" tabindex="1"><img src="https://blog.ifanxing.eu.org/post-images/1651761299583.jpg" alt="禁用更新" loading="lazy"></figure>
+<p>win11也差不多，不过7天后更新，被微软改成了<strong>暂停更新</strong>，也是可以通过更改时间，再暂停更新，来达到目的。<br>
+网友真的太有意思了，哈哈哈😄。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[22.05.04 云云]]></title>
+        <id>https://blog.ifanxing.eu.org/post/KfvGJckJ_/</id>
+        <link href="https://blog.ifanxing.eu.org/post/KfvGJckJ_/">
+        </link>
+        <updated>2022-05-04T18:14:24.000Z</updated>
+        <content type="html"><![CDATA[<p>中午过去朋友家拿东西，回家的路上碰到表弟，表弟屁颠屁颠就跟着我，之后爷爷来我家找他，说他家里人刚刚一直在找他，就把他带走了，其实我并不喜欢他，因为我不是很喜欢小孩，小孩总是不讲道理，哈哈哈。<br>
+晚上终于拿到了法压壶，回家之后，就开始查泡咖啡应该怎么操作，其实挺简单的，不过一些细节，比如重量配比，以及一些时间都不太懂，而且也没有小型的称重器，一顿操作之后，热乎乎的咖啡泡好了。<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1651688643552.jpg" alt="咖啡" loading="lazy">左边是用在咸鱼上淘的手摇磨豆机磨出来的咖啡粗粉，右边是用法压壶泡好，在沉淀的咖啡。<br>
+确实好苦，加了糖之后，发现加多了，味道太怪了。<br>
+明天再泡泡看。</p>
+]]></content>
+    </entry>
+</feed>

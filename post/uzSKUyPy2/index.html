@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>小米 AX1800 安装 ShellClash | 繁星Blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.ifanxing.eu.org/favicon.ico?v=1705634048861">
+<link rel="stylesheet" href="https://blog.ifanxing.eu.org/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="本文介绍如何在小米 AX1800 上安装 ShellClash。
+1 固件降级
+小米 AX1800 1.0.336 版本固件
+在 MiWiFi 后台的常用设置 -&gt; 系统状态中点击手动升级，使用 1.0.336 版本的固件对路由器进行..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.ifanxing.eu.org">
+        <img src="https://blog.ifanxing.eu.org/images/avatar.png?v=1705634048861" class="site-logo">
+        <h1 class="site-title">繁星Blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://blog.ifanxing.eu.org/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">小米 AX1800 安装 ShellClash</h2>
+            <div class="post-date">2023-12-18</div>
+            
+            <div class="post-content" v-pre>
+              <p>本文介绍如何在小米 AX1800 上安装 ShellClash。</p>
+<h1 id="1-固件降级">1 固件降级</h1>
+<p><a href="https://github.com/ZintrulCre/warehouse/blob/main/resources/proxy/miwifi_rm1800_firmware_fafda_1.0.336.bin?raw=true">小米 AX1800 1.0.336 版本固件</a></p>
+<p>在 MiWiFi 后台的常用设置 -&gt; 系统状态中点击手动升级，使用 1.0.336 版本的固件对路由器进行降级，整个过程不需要任何额外的操作。</p>
+<figure data-type="image" tabindex="1"><img src="https://blog.ifanxing.eu.org/post-images/1702914867025.png" alt="" loading="lazy"></figure>
+<p>完成后第一次进入后台配置时选择不自动更新，或在小米 Wi-Fi 手机 App 中关闭自动更新功能。</p>
+<figure data-type="image" tabindex="2"><img src="https://blog.ifanxing.eu.org/post-images/1702914962586.png" alt="" loading="lazy"></figure>
+<p>更新完成后路由器会重置为路由器底部贴条的设置。</p>
+<h1 id="2-解锁-ssh">2 解锁 SSH</h1>
+<p>首先登陆小米路由器后台 192.168.31.1，将浏览器地址栏中 stok= 后面的一部分的即为拷贝下来。</p>
+<figure data-type="image" tabindex="3"><img src="https://blog.ifanxing.eu.org/post-images/1702915096024.png" alt="" loading="lazy"></figure>
+<h1 id="获取-ssh-权限">获取 SSH 权限</h1>
+<p>在浏览器中打开一个新页签，在地址栏中输入下面的链接，将其中 stok=...... 中后半部分的六个点换成刚才拷贝的内容，页面上显示 {&quot;code&quot;:0} 即代表成功，这样就解锁了 SSH 到路由器上的权限。</p>
+<p><code>http://192.168.31.1/cgi-bin/luci/;stok=....../api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B%20nvram%20set%20ssh_en%3D1%3B%20nvram%20commit%3B%20sed%20-i%20's%2Fchannel%3D.*%2Fchannel%3D%5C%22debug%5C%22%2Fg'%20%2Fetc%2Finit.d%2Fdropbear%3B%20%2Fetc%2Finit.d%2Fdropbear%20start%3B </code></p>
+<figure data-type="image" tabindex="4"><img src="https://blog.ifanxing.eu.org/post-images/1702915231228.png" alt="" loading="lazy"></figure>
+<h1 id="修改-root-密码">修改 root 密码</h1>
+<p>在浏览器中打开一个新页签，在地址栏中输入下面的链接，将其中 stok=...... 中后半部分的六个点换成刚才拷贝的内容，页面上显示 {&quot;code&quot;:0} 即代表成功，这样就将路由器上 root 账户的密码改为了 admin。</p>
+<p><code>http://192.168.31.1/cgi-bin/luci/;stok=....../api/misystem/set_config_iotdev?bssid=Xiaomi&amp;user_id=longdike&amp;ssid=-h%3B%20echo%20-e%20'admin%5Cnadmin'%20%7C%20passwd%20root%3B </code></p>
+<h1 id="连接-ssh">连接 SSH</h1>
+<p>打开 terminal 或者 powershell，ssh 到路由器的 root 账户上，密码是 admin。</p>
+<p><code>ssh root@192.168.31.1 </code><br>
+<img src="https://blog.ifanxing.eu.org/post-images/1702915447632.png" alt="" loading="lazy"></p>
+<h1 id="3-使用-shellclash">3 使用 ShellClash</h1>
+<p><strong>安装</strong></p>
+<p>ssh 到路由器上后，输入以下命令安装 ShellClash。</p>
+<p><code>sh -c &quot;$(curl -kfsSl https://cdn.jsdelivr.net/gh/juewuy/ShellClash@master/install.sh)&quot; &amp;&amp; source /etc/profile &amp;&gt; /dev/null </code><br>
+选择 1 安装到 /etc 目录下。</p>
+<figure data-type="image" tabindex="5"><img src="https://blog.ifanxing.eu.org/post-images/1702915596499.png" alt="" loading="lazy"></figure>
+<p><strong>配置</strong></p>
+<p>安装完成后，输入 clash 命令进行相关的配置，环境选择 1 主路由或旁路由，保证局域网流量都能通过 ShellClash 客户端。</p>
+<p>UDP 流量和 dashboard 面板根据需求选择，随后等待 clash 核心和 GeoIP 数据库下载完成。</p>
+<figure data-type="image" tabindex="6"><img src="https://blog.ifanxing.eu.org/post-images/1702915690821.png" alt="" loading="lazy"></figure>
+<p>接下来选 1 开始导入配置文件，19如果有 Clash 订阅链接的话可以选 2 生成 Clash 配置文件，再粘贴订阅的 url；否则选 1 直接导入。</p>
+<figure data-type="image" tabindex="7"><img src="https://blog.ifanxing.eu.org/post-images/1702915767354.png" alt="" loading="lazy"></figure>
+<p>最后选 1 启动 Clash 服务。</p>
+<p>启动完成后再次运行 clash，选 4 允许开机启动，这样以后每次路由器重启都不再需要手动 SSH 并重新启动 Clash 了。同时还可以在局域网内访问 http://192.168.31.1:9999/ui 来进行节点和规则的修改。</p>
+<figure data-type="image" tabindex="8"><img src="https://blog.ifanxing.eu.org/post-images/1702916242788.png" alt="" loading="lazy"></figure>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.ifanxing.eu.org/post/HIYKmSrLS/">
+                  <h3 class="post-title">
+                    windows powershell中文乱码
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

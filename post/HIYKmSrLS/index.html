@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>windows powershell中文乱码 | 繁星Blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.ifanxing.eu.org/favicon.ico?v=1705634048861">
+<link rel="stylesheet" href="https://blog.ifanxing.eu.org/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Windows PowerShell 中文乱码的问题通常是由于系统默认的代码页和字符集与 PowerShell 会话的代码页和字符集不匹配造成的。
+要解决这个问题，您可以尝试以下步骤：
+
+
+在 PowerShell 中输入 $PSDefau..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.ifanxing.eu.org">
+        <img src="https://blog.ifanxing.eu.org/images/avatar.png?v=1705634048861" class="site-logo">
+        <h1 class="site-title">繁星Blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://blog.ifanxing.eu.org/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">windows powershell中文乱码</h2>
+            <div class="post-date">2023-09-14</div>
+            
+            <div class="post-content" v-pre>
+              <p>Windows PowerShell 中文乱码的问题通常是由于系统默认的代码页和字符集与 PowerShell 会话的代码页和字符集不匹配造成的。</p>
+<p>要解决这个问题，您可以尝试以下步骤：</p>
+<ul>
+<li>
+<p>在 PowerShell 中输入 <code>$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'</code>，然后按回车键。这会将输出文件的默认编码更改为 UTF-8，这通常可以解决乱码问题。</p>
+</li>
+<li>
+<p>如果仍然无法解决问题，可以尝试更改 PowerShell 会话的代码页和字符集。输入 <code>chcp 65001</code> 并按回车键，然后输入 <code>$OutputEncoding = [console]::OutputEncoding = [System.Text.Encoding]::UTF8</code> 并按回车键。这会将 PowerShell 会话的代码页和字符集更改为 UTF-8。</p>
+</li>
+<li>
+<p>如果仍然无法解决问题，可以尝试在 PowerShell 中运行以下命令来更改文本文件的默认编码：<code>[System.Text.Encoding]::Default = [System.Text.Encoding]::UTF8</code></p>
+</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.ifanxing.eu.org/post/CKfY8rEpb/">
+                  <h3 class="post-title">
+                    windows中cmd和powershell设置代理
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

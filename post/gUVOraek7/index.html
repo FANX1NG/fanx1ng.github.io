@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Oculus客户端无法登录的解决办法 | 繁星Blog</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://blog.ifanxing.eu.org/favicon.ico?v=1705634048861">
+<link rel="stylesheet" href="https://blog.ifanxing.eu.org/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="问题描述
+win10 环境，Oculus 应用版本30.0.0.36.502
+已挂梯子，注册 facebook 账号，安装好 Oculus，但是登录的时候一直卡在这个界面
+
+解决方法：修改 host
+1.打开 C:\Windows\Syst..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://blog.ifanxing.eu.org">
+        <img src="https://blog.ifanxing.eu.org/images/avatar.png?v=1705634048861" class="site-logo">
+        <h1 class="site-title">繁星Blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://blog.ifanxing.eu.org/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Oculus客户端无法登录的解决办法</h2>
+            <div class="post-date">2023-03-04</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="问题描述"><strong>问题描述</strong></h1>
+<p>win10 环境，Oculus 应用版本30.0.0.36.502</p>
+<p>已挂梯子，注册 facebook 账号，安装好 Oculus，但是登录的时候一直卡在这个界面<br>
+<img src="https://blog.ifanxing.eu.org/post-images/1677909505707.png" alt="一直转圈圈" loading="lazy"></p>
+<h1 id="解决方法修改-host">解决方法：修改 host</h1>
+<p>1.打开 C:\Windows\System32\drivers\etc</p>
+<p>2.找到 hosts 这个文件，用记事本打开</p>
+<p>3.在该文件的末尾添加以下字符：</p>
+<p>`157.240.11.49 graph.oculus.com</p>
+<p>157.240.11.49 www2.oculus.com</p>
+<p>157.240.8.49 scontent.oculuscdn.com</p>
+<p>157.240.8.49 securecdn.oculus.com`</p>
+<p>4.保存，保存时会让你选择路径，选择桌面</p>
+<p>5.将桌面保存的文件后缀 .txt 删掉，之后复制该文件，替换掉第 2 步打开的那个文件（C:\Windows\System32\drivers\etc 下的 host）</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://blog.ifanxing.eu.org/post/A4Hcv7V_u/">
+                  <h3 class="post-title">
+                    如何通过局域网共享V2ray
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
